@@ -1,0 +1,38 @@
+﻿<Page
+    x:Class="T1807EHelloUWP.Pages.Register"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:T1807EHelloUWP.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <ScrollViewer Margin="20">
+        <StackPanel Margin="50" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock>First Name</TextBlock>
+            <TextBox x:Name="FirstName"></TextBox>
+            <TextBlock>Last Name</TextBlock>
+            <TextBox x:Name="LastName"></TextBox>
+            <TextBlock>Avatar</TextBlock>
+            <Button Click="ButtonBase_OnClick">SNAP</Button>
+            <Image x:Name="Avatar" Width="200" Height="200"></Image>
+            <TextBox x:Name="AvatarUrl"></TextBox>
+            <TextBlock>Phone</TextBlock>
+            <TextBox x:Name="Phone"></TextBox>
+            <TextBlock>Address</TextBlock>
+            <TextBox x:Name="Address"></TextBox>
+            <TextBlock>Introduction</TextBlock>
+            <TextBox x:Name="Introduction"></TextBox>
+            <TextBlock>Gender</TextBlock>
+            <TextBox x:Name="Gender"></TextBox>
+            <TextBlock>Birthday</TextBlock>
+            <TextBox x:Name="Birthday"></TextBox>
+            <TextBlock>Email</TextBlock>
+            <TextBox x:Name="Email"></TextBox>
+            <TextBlock>Password</TextBlock>
+            <PasswordBox x:Name="Password"></PasswordBox>
+            <Button Click="ButtonBase_JsonOnClick">Register</Button>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

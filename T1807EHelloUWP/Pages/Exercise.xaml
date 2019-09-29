@@ -1,0 +1,30 @@
+﻿<Page
+    x:Class="T1807EHelloUWP.Pages.Exercise"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:T1807EHelloUWP.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <ScrollViewer>
+            <StackPanel >
+                <TextBlock>Username</TextBlock>
+                <TextBox x:Name="username"></TextBox>
+                <TextBlock>Password</TextBlock>
+                <PasswordBox x:Name="password"></PasswordBox>
+                <TextBlock>Confirm Password</TextBlock>
+                <TextBox x:Name="confirmPassword"></TextBox>
+                <TextBlock>Email</TextBlock>
+                <TextBox x:Name="email"></TextBox>
+                <TextBlock>Phone</TextBlock>
+                <TextBox x:Name="phone"></TextBox>
+                <TextBlock>Avatar</TextBlock>
+                <TextBox x:Name="avatar"></TextBox>
+                <Button x:Name="submit" Click="Submit_Click">Submit</Button>
+            </StackPanel>
+        </ScrollViewer>
+    </Grid>
+</Page>
