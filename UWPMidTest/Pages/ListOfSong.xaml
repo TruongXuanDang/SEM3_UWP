@@ -24,8 +24,6 @@
             <TextBox x:Name="Link"></TextBox>
 
             <Button Click="ButtonBase_OnClick">Submit</Button>
-            <TextBlock>List of songs</TextBlock>
-            <TextBox x:Name="MySongList"></TextBox>
         </StackPanel>
     </ScrollViewer>
     

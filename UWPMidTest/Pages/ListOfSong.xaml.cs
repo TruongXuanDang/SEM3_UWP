@@ -31,8 +31,6 @@ namespace UWPMidTest.Pages
     public sealed partial class ListOfSong : Page
     {
         private const string apiCreateNewSong = "https://2-dot-backup-server-003.appspot.com/_api/v2/songs/post-free";
-        private const string apiGetSongList = "https://2-dot-backup-server-003.appspot.com/_api/v2/songs/get-free-songs";
-        public ObservableCollection<SongInfo> ListSongs = new ObservableCollection<SongInfo>();
         public ListOfSong()
         {
             this.InitializeComponent();
@@ -56,16 +54,8 @@ namespace UWPMidTest.Pages
                 HttpContent content = new StringContent(JsonConvert.SerializeObject(songInfo), Encoding.UTF8, "application/json");
                 Task<HttpResponseMessage> httpRequestMessageToCreateNewSong = httpClient.PostAsync(apiCreateNewSong, content);
                 var jsonResultToCreateNewSong = httpRequestMessageToCreateNewSong.Result.Content.ReadAsStringAsync().Result;
-
-                //var listOfSong = new ObservableCollection<SongInfo>();
-                //listOfSong.Add(songInfo);
-                Task<HttpResponseMessage> httpRequestMessageToGetSongList = httpClient.GetAsync(apiGetSongList);
-                var jsonResultToGetSongList = httpRequestMessageToGetSongList.Result.Content.ReadAsStringAsync().Result;
-                ObservableCollection<SongInfo> listSong = JsonConvert.DeserializeObject<ObservableCollection<SongInfo>>(jsonResultToGetSongList);
-                foreach (SongInfo item in listSong)
-                {
-                    ListSongs.Add(item);
-                }
+                MessageDialog dialog = new MessageDialog("Succeeded");
+                await dialog.ShowAsync();
             }
             else
             {
