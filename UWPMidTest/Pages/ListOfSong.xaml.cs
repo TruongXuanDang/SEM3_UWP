@@ -19,6 +19,7 @@ using UWPMidTest.Entities;
 using Newtonsoft.Json;
 using System.Collections.ObjectModel;
 using Windows.Data.Json;
+using Windows.UI.Popups;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,7 +39,7 @@ namespace UWPMidTest.Pages
 
         }
 
-        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
             var songInfo = new SongInfo
             {
@@ -49,20 +50,39 @@ namespace UWPMidTest.Pages
                 thumbnail = Thumbnail.Text,
                 link = Link.Text,
             };
-            var httpClient = new HttpClient();
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(songInfo), Encoding.UTF8, "application/json");
-            Task<HttpResponseMessage> httpRequestMessageToCreateNewSong = httpClient.PostAsync(apiCreateNewSong, content);
-            var jsonResultToCreateNewSong = httpRequestMessageToCreateNewSong.Result.Content.ReadAsStringAsync().Result;
-
-            //var listOfSong = new ObservableCollection<SongInfo>();
-            //listOfSong.Add(songInfo);
-            Task<HttpResponseMessage> httpRequestMessageToGetSongList = httpClient.GetAsync(apiGetSongList);
-            var jsonResultToGetSongList = httpRequestMessageToGetSongList.Result.Content.ReadAsStringAsync().Result;
-            ObservableCollection<SongInfo> listSong = JsonConvert.DeserializeObject<ObservableCollection<SongInfo>>(jsonResultToGetSongList);
-            foreach (SongInfo item in listSong)
+            if (ValidateInputData(songInfo) == true)
             {
-                ListSongs.Add(item);
+                var httpClient = new HttpClient();
+                HttpContent content = new StringContent(JsonConvert.SerializeObject(songInfo), Encoding.UTF8, "application/json");
+                Task<HttpResponseMessage> httpRequestMessageToCreateNewSong = httpClient.PostAsync(apiCreateNewSong, content);
+                var jsonResultToCreateNewSong = httpRequestMessageToCreateNewSong.Result.Content.ReadAsStringAsync().Result;
+
+                //var listOfSong = new ObservableCollection<SongInfo>();
+                //listOfSong.Add(songInfo);
+                Task<HttpResponseMessage> httpRequestMessageToGetSongList = httpClient.GetAsync(apiGetSongList);
+                var jsonResultToGetSongList = httpRequestMessageToGetSongList.Result.Content.ReadAsStringAsync().Result;
+                ObservableCollection<SongInfo> listSong = JsonConvert.DeserializeObject<ObservableCollection<SongInfo>>(jsonResultToGetSongList);
+                foreach (SongInfo item in listSong)
+                {
+                    ListSongs.Add(item);
+                }
             }
+            else
+            {
+
+            }
+            
+        }
+
+        private bool ValidateInputData(SongInfo songInfo)
+        {
+            if (songInfo.name != null && songInfo.thumbnail != null && songInfo.link != null &&
+                songInfo.name.Length <= 50)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
