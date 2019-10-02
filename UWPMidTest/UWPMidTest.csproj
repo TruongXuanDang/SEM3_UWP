@@ -127,6 +127,12 @@
     <Compile Include="Pages\ListOfSong.xaml.cs">
       <DependentUpon>ListOfSong.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\NavigationViewTwo.xaml.cs">
+      <DependentUpon>NavigationViewTwo.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ShowSongList.xaml.cs">
+      <DependentUpon>ShowSongList.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -154,6 +160,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\ListOfSong.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\NavigationViewTwo.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ShowSongList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
