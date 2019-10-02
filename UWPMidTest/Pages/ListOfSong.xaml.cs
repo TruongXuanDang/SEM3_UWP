@@ -69,7 +69,8 @@ namespace UWPMidTest.Pages
             }
             else
             {
-
+                MessageDialog dialog = new MessageDialog("Name, thumbnail, link need to be validated");
+                await dialog.ShowAsync();
             }
             
         }
@@ -77,7 +78,7 @@ namespace UWPMidTest.Pages
         private bool ValidateInputData(SongInfo songInfo)
         {
             if (songInfo.name != "" && songInfo.thumbnail != "" && songInfo.link != "" &&
-                songInfo.name.Length <= 50)
+                songInfo.name.Length <= 50 && songInfo.link.EndsWith(".mp3"))
             {
                 return true;
             }
