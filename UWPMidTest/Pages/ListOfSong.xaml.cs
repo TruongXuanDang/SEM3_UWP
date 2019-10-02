@@ -76,7 +76,7 @@ namespace UWPMidTest.Pages
 
         private bool ValidateInputData(SongInfo songInfo)
         {
-            if (songInfo.name != null && songInfo.thumbnail != null && songInfo.link != null &&
+            if (songInfo.name != "" && songInfo.thumbnail != "" && songInfo.link != "" &&
                 songInfo.name.Length <= 50)
             {
                 return true;
