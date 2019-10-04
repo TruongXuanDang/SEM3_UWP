@@ -8,7 +8,31 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock>User Register</TextBlock>
-    </Grid>
+    <ScrollViewer Margin="20">
+        <StackPanel Margin="50" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock>First Name</TextBlock>
+            <TextBox x:Name="FirstName"></TextBox>
+            <TextBlock>Last Name</TextBlock>
+            <TextBox x:Name="LastName"></TextBox>
+            <TextBlock>Avatar</TextBlock>
+            <Button Click="ButtonBase_JSonOnClick">SNAP</Button>
+            <Image x:Name="Avatar" Width="200" Height="200"></Image>
+            <TextBox x:Name="AvatarUrl"></TextBox>
+            <TextBlock>Phone</TextBlock>
+            <TextBox x:Name="Phone"></TextBox>
+            <TextBlock>Address</TextBlock>
+            <TextBox x:Name="Address"></TextBox>
+            <TextBlock>Introduction</TextBlock>
+            <TextBox x:Name="Introduction"></TextBox>
+            <TextBlock>Gender</TextBlock>
+            <TextBox x:Name="Gender"></TextBox>
+            <TextBlock>Birthday</TextBlock>
+            <TextBox x:Name="Birthday"></TextBox>
+            <TextBlock>Email</TextBlock>
+            <TextBox x:Name="Email"></TextBox>
+            <TextBlock>Password</TextBlock>
+            <PasswordBox x:Name="Password"></PasswordBox>
+            <Button Click="ButtonBase_OnClick">Register</Button>
+        </StackPanel>
+    </ScrollViewer>
 </Page>

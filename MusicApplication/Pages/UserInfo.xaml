@@ -9,6 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock>User Info</TextBlock>
+        <TextBox x:Name="MyTextInfo"></TextBox>
     </Grid>
 </Page>
