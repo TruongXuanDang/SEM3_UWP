@@ -8,7 +8,22 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock>Song Create</TextBlock>
-    </Grid>
+    <ScrollViewer Margin="20">
+        <StackPanel Margin="50" HorizontalAlignment="Left" VerticalAlignment="Top">
+            <TextBlock>Name</TextBlock>
+            <TextBox x:Name="Name"></TextBox>
+            <TextBlock>Description</TextBlock>
+            <TextBox x:Name="Description"></TextBox>
+            <TextBlock>Singer</TextBlock>
+            <TextBox x:Name="Singer"></TextBox>
+            <TextBlock>Author</TextBlock>
+            <TextBox x:Name="Author"></TextBox>
+            <TextBlock>Thumbnail</TextBlock>
+            <TextBox x:Name="Thumbnail"></TextBox>
+            <TextBlock>Link</TextBlock>
+            <TextBox x:Name="Link"></TextBox>
+
+            <Button Click="ButtonBase_OnClick">Submit</Button>
+        </StackPanel>
+    </ScrollViewer>
 </Page>
