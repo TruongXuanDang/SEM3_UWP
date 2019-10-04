@@ -9,6 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-
+        <TextBlock>Song Create</TextBlock>
     </Grid>
 </Page>

@@ -126,8 +126,8 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\NavView.xaml.cs">
-      <DependentUpon>NavView.xaml</DependentUpon>
+    <Compile Include="Pages\NavigationView.xaml.cs">
+      <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\SongCreate.xaml.cs">
       <DependentUpon>SongCreate.xaml</DependentUpon>
@@ -174,7 +174,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\NavView.xaml">
+    <Page Include="Pages\NavigationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
