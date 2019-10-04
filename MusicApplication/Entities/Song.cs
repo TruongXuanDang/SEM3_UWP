@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace MusicApplication.Entities
 {
-    class Song
+    public class Song
     {
         public string name { get; set; }
         public string description { get; set; }

@@ -5,10 +5,27 @@
     xmlns:local="using:MusicApplication.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:entities="using:MusicApplication.Entities"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock>Song List</TextBlock>
+        <ListView ItemsSource="{x:Bind ListSongs}" x:Name="ListOfSongs">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="entities:Song">
+                    <StackPanel Margin="0, 10, 0, 10" Orientation="Horizontal" Tag="{Binding}">
+                        <Ellipse Width="77" Height="77">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{x:Bind thumbnail}"></ImageBrush>
+                            </Ellipse.Fill>
+                        </Ellipse>
+                        <StackPanel Margin="10, 10, 0, 0">
+                            <TextBlock Text="{x:Bind name}" Style="{ThemeResource BaseTextBlockStyle}"></TextBlock>
+                            <TextBlock Text="{x:Bind singer}" Style="{ThemeResource CaptionTextBlockStyle}"></TextBlock>
+                        </StackPanel>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
