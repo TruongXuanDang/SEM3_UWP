@@ -1,9 +1,12 @@
-﻿using System.Collections.ObjectModel;
+﻿using System;
+using System.Collections.ObjectModel;
 using System.Net.Http;
 using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using MusicApplication.Entities;
 using Newtonsoft.Json;
+using Windows.Media.Core;
+using Windows.Media.Playback;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -28,6 +31,29 @@ namespace MusicApplication.Pages
             foreach (Song song in listSong)
             {
                 ListSongs.Add(song);
+            }
+        }
+
+
+        private void ListOfSongs_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                ListView view = (ListView) sender;
+                Song clicked = view.SelectedItem as Song;
+                MediaPlayer player = new MediaPlayer();
+                string path = clicked.link;
+                Uri outUri;
+
+                Uri uri = new Uri(path);
+                MediaSource mediaSource = MediaSource.CreateFromUri(uri);
+                mediaPlayer.Source = mediaSource;
+                mediaPlayer.MediaPlayer.Play();
+
+            }
+            catch (Exception exception)
+            {
+                
             }
         }
     }

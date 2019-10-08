@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Constant\ApiUrl.cs" />
     <Compile Include="Entities\LoginMember.cs" />
     <Compile Include="Entities\Song.cs" />
     <Compile Include="Entities\SongList.cs" />
@@ -134,6 +135,9 @@
     </Compile>
     <Compile Include="Pages\SongList.xaml.cs">
       <DependentUpon>SongList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\SongListOfMine.xaml.cs">
+      <DependentUpon>SongListOfMine.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\UserLogin.xaml.cs">
       <DependentUpon>UserLogin.xaml</DependentUpon>
@@ -183,6 +187,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\SongList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SongListOfMine.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

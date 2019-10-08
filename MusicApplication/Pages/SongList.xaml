@@ -10,7 +10,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <ListView ItemsSource="{x:Bind ListSongs}" x:Name="ListOfSongs">
+        <MediaPlayerElement x:Name="mediaPlayer"
+                            Width="400"
+                            AutoPlay="False"
+                            AreTransportControlsEnabled="True"
+        />
+        <ListView ItemsSource="{x:Bind ListSongs}" x:Name="ListOfSongs" SelectionChanged="ListOfSongs_OnSelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="entities:Song">
                     <StackPanel Margin="0, 10, 0, 10" Orientation="Horizontal" Tag="{Binding}">
@@ -23,9 +28,11 @@
                             <TextBlock Text="{x:Bind name}" Style="{ThemeResource BaseTextBlockStyle}"></TextBlock>
                             <TextBlock Text="{x:Bind singer}" Style="{ThemeResource CaptionTextBlockStyle}"></TextBlock>
                         </StackPanel>
+
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+                        
     </Grid>
 </Page>
