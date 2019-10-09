@@ -33,6 +33,7 @@
                 <NavigationViewItemHeader x:Name="SongListHeader"
                                           Content="Songs"/>
                 <NavigationViewItem Tag="insertSong" Icon="Audio" Content="Insert"/>
+                <NavigationViewItem Tag="mySongs" Icon="Audio" Content="My Songs"/>
             </NavigationView.MenuItems>
 
             <NavigationView.AutoSuggestBox>

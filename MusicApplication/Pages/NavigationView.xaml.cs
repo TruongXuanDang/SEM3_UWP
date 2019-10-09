@@ -46,6 +46,7 @@ namespace MusicApplication.Pages
             ("privateInfo", typeof(UserInfo)),
             ("privateInfo", typeof(UserInfo)),
             ("insertSong", typeof(SongCreate)),
+            ("mySongs", typeof(SongListOfMine)),
         };
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
