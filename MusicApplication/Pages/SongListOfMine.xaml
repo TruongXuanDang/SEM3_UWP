@@ -11,6 +11,7 @@
 
     <Grid>
         <MediaPlayerElement x:Name="mediaPlayer"
+                            Source="ms-appx:///Media/Track1.mp4" PosterSource="Media/AlbumCover.png"
                             Width="400"
                             AutoPlay="False"
                             AreTransportControlsEnabled="True"

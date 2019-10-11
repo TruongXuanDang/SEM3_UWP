@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MusicApplication.Entities;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Windows.Media.Core;
 using Newtonsoft.Json;
@@ -29,19 +30,33 @@ namespace MusicApplication.Pages
     /// </summary>
     public sealed partial class SongListOfMine : Page
     {
-        private const string apiGetSongList = "https://2-dot-backup-server-003.appspot.com/_api/v2/songs/get-free-songs";
+        private const string apiGetSongList = "https://2-dot-backup-server-003.appspot.com/_api/v2/songs/get-mine";
         public ObservableCollection<Song> ListSongs = new ObservableCollection<Song>();
         public SongListOfMine()
         {
             this.InitializeComponent();
             var httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("Authorization", ReadFromTXTFile());
+            //Task<HttpResponseMessage> httpRequestMessageToGetSongList = httpClient.GetAsync(apiGetSongList);
             Task<HttpResponseMessage> httpRequestMessageToGetSongList = httpClient.GetAsync(apiGetSongList);
             var jsonResultToGetSongList = httpRequestMessageToGetSongList.Result.Content.ReadAsStringAsync().Result;
             ObservableCollection<Song> listSong = JsonConvert.DeserializeObject<ObservableCollection<Song>>(jsonResultToGetSongList);
             foreach (Song song in listSong)
             {
+
                 ListSongs.Add(song);
             }
+        }
+
+        public string ReadFromTXTFile()
+        {
+            Windows.Storage.StorageFolder storageFolder =
+                Windows.Storage.ApplicationData.Current.LocalFolder;
+            Windows.Storage.StorageFile sampleFile =
+                storageFolder.GetFileAsync("sample.txt").GetAwaiter().GetResult();
+
+            string text = Windows.Storage.FileIO.ReadTextAsync(sampleFile).GetAwaiter().GetResult();
+            return text;
         }
 
         private void ListOfSongs_OnSelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -10,11 +10,10 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <MediaPlayerElement x:Name="mediaPlayer"
-                            Width="400"
-                            AutoPlay="False"
-                            AreTransportControlsEnabled="True"
-        />
+        <ScrollViewer>
+
+        <StackPanel>
+        
         <ListView ItemsSource="{x:Bind ListSongs}" x:Name="ListOfSongs" SelectionChanged="ListOfSongs_OnSelectionChanged">
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="entities:Song">
@@ -34,5 +33,26 @@
             </ListView.ItemTemplate>
         </ListView>
                         
+        </StackPanel>
+        </ScrollViewer>
+        <StackPanel>
+            <MediaPlayerElement x:Name="mediaPlayer"
+                                Width="400"
+                                AutoPlay="False"
+                                AreTransportControlsEnabled="True"
+            />
+        </StackPanel>
+        <StackPanel VerticalAlignment="Bottom">
+            <MediaElement x:Name="MyMediaPlayer"/>
+            <CommandBar>
+                <AppBarSeparator/>
+                <AppBarButton x:Name="PreviousButton" Icon="Previous" Label="Previous" Click="PreviousButton_OnClick"/>
+                <AppBarButton x:Name="StatusButton" Icon="Play" Label="Play" Click="StatusButton_OnClick"/>
+                <AppBarButton x:Name="NextButton" Icon="Next" Label="Next" Click="NextButton_OnClick"/>
+                <CommandBar.Content>
+                    <TextBlock x:Name="ControlLabel" Text="Please choose a song." Margin="12,14"/>
+                </CommandBar.Content>
+            </CommandBar>
+        </StackPanel>
     </Grid>
 </Page>

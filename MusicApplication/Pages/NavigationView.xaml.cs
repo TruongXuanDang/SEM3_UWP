@@ -27,6 +27,7 @@ namespace MusicApplication.Pages
         public NavigationView()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         // Add "using" for WinUI controls.

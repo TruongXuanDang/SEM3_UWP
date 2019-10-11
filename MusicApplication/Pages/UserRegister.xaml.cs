@@ -12,6 +12,7 @@ using System.Net;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Diagnostics;
 using System.Text;
+using Windows.UI.Xaml.Navigation;
 using Newtonsoft.Json;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -28,6 +29,7 @@ namespace MusicApplication.Pages
         public Register()
         {
             this.InitializeComponent();
+            this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
