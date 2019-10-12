@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MusicApplication.Constant;
 using MusicApplication.Entities;
@@ -17,6 +18,8 @@ namespace MusicApplication.Pages
         private FileService fileService;
         private SongService songService;
         public ObservableCollection<Song> ListSongs = new ObservableCollection<Song>();
+        public bool PlayingStatus = false;
+        public int CurrentSongIndex = 0;
         public SongListOfMine()
         {
             this.InitializeComponent();
@@ -45,6 +48,64 @@ namespace MusicApplication.Pages
             {
 
             }
+        }
+
+        private void PreviousButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (CurrentSongIndex <= ListSongs.Count - 1 && 0 < CurrentSongIndex)
+            {
+                CurrentSongIndex--;
+            }
+            else if (CurrentSongIndex == 0)
+            {
+                CurrentSongIndex = ListSongs.Count - 1;
+            }
+
+            mediaPlayer.Source = songService.GetMediaSourceToPlaySong(ListSongs[CurrentSongIndex]);
+            ListOfSongs.SelectedIndex = CurrentSongIndex;
+            PlaySong();
+        }
+
+        private void StatusButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (PlayingStatus == false)
+            {
+                PlaySong();
+            }
+            else
+            {
+                PauseSong();
+            }
+        }
+
+        private void NextButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (CurrentSongIndex < ListSongs.Count - 1 && 0 <= CurrentSongIndex)
+            {
+                CurrentSongIndex++;
+            }
+            else if (CurrentSongIndex == ListSongs.Count - 1)
+            {
+                CurrentSongIndex = 0;
+            }
+
+            mediaPlayer.Source = songService.GetMediaSourceToPlaySong(ListSongs[CurrentSongIndex]);
+            ListOfSongs.SelectedIndex = CurrentSongIndex;
+            PlaySong();
+        }
+
+        private void PauseSong()
+        {
+            mediaPlayer.MediaPlayer.Pause();
+            PlayingStatus = false;
+            StatusButton.Icon = new SymbolIcon(Symbol.Play);
+        }
+
+        private void PlaySong()
+        {
+            mediaPlayer.MediaPlayer.Play();
+            PlayingStatus = true;
+            StatusButton.Icon = new SymbolIcon(Symbol.Pause);
         }
     }
 }

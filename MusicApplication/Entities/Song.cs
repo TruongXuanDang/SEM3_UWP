@@ -14,5 +14,22 @@ namespace MusicApplication.Entities
         public string author { get; set; }
         public string link { get; set; }
         public string thumbnail { get; set; }
+        public Dictionary<string, string> Validate()
+        {
+            var errors = new Dictionary<string, string>();
+            if (string.IsNullOrEmpty(name))
+            {
+                errors.Add("name", "Name is required!");
+            }
+            else if (name.Length < 5 || name.Length > 30)
+            {
+                errors.Add("name", "Name must be 5 to 30 characters!");
+            }
+            if (string.IsNullOrEmpty(singer))
+            {
+                errors.Add("single", "Single is required!");
+            }
+            return errors;
+        }
     }
 }

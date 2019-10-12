@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Windows.UI.Popups;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -35,30 +36,31 @@ namespace MusicApplication.Pages
                 thumbnail = Thumbnail.Text,
                 link = Link.Text,
             };
-            if (ValidateInputData(song) == true)
+
+            Dictionary<String, String> errors = song.Validate();
+            if (errors.Count == 0)
             {
                 songService.CreateSong(song, fileService.ReadFromTxtFile());
                 MessageDialog dialog = new MessageDialog("Succeeded");
                 await dialog.ShowAsync();
+
             }
             else
             {
-                MessageDialog dialog = new MessageDialog("Name, thumbnail, link need to be validated");
-                await dialog.ShowAsync();
+                if (errors.ContainsKey("name"))
+                {
+                    NameMessage.Text = errors["name"];
+                    NameMessage.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    //NameMessage.Text = errors["name"];
+                    NameMessage.Visibility = Visibility.Collapsed;
+                }
+                // pop up error message
             }
-
-        }
-
-        private bool ValidateInputData(Song songInfo)
-        {
-            if (songInfo.name != "" && songInfo.thumbnail != "" && songInfo.link != "" &&
-                songInfo.name.Length <= 50 && songInfo.link.EndsWith(".mp3"))
-            {
-                return true;
-            }
-
-            //return false;
-            return true;
+            //var song = new Song();
+            
         }
     }
 }
