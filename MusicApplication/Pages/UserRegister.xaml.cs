@@ -113,7 +113,7 @@ namespace MusicApplication.Pages
                 address = Address.Text,
                 introduction = Introduction.Text,
                 gender = Int32.Parse(Gender.Text),
-                birthday = Birthday.Text,
+                birthday = Birthday.DayFormat,
                 email = Email.Text,
                 password = Password.Password
             };

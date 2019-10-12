@@ -6,32 +6,31 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
     <ScrollViewer Margin="20">
-        <StackPanel Margin="50" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <TextBlock>First Name</TextBlock>
-            <TextBox x:Name="FirstName"></TextBox>
-            <TextBlock>Last Name</TextBlock>
-            <TextBox x:Name="LastName"></TextBox>
-            <TextBlock>Avatar</TextBlock>
-            <Button Click="ButtonBase_TakePhotoOnClick">SNAP</Button>
-            <Image x:Name="Avatar" Width="200" Height="200"></Image>
-            <TextBox x:Name="AvatarUrl"></TextBox>
-            <TextBlock>Phone</TextBlock>
-            <TextBox x:Name="Phone"></TextBox>
-            <TextBlock>Address</TextBlock>
-            <TextBox x:Name="Address"></TextBox>
-            <TextBlock>Introduction</TextBlock>
-            <TextBox x:Name="Introduction"></TextBox>
-            <TextBlock>Gender</TextBlock>
-            <TextBox x:Name="Gender"></TextBox>
-            <TextBlock>Birthday</TextBlock>
-            <TextBox x:Name="Birthday"></TextBox>
-            <TextBlock>Email</TextBlock>
-            <TextBox x:Name="Email"></TextBox>
-            <TextBlock>Password</TextBlock>
-            <PasswordBox x:Name="Password"></PasswordBox>
-            <Button Click="ButtonBase_RegisterClick">Register</Button>
-        </StackPanel>
+        <Grid Background="White">
+            <RelativePanel>
+                <StackPanel x:Name="Photo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <Image x:Name="Avatar" Width="200" Height="200" Source="/Sources/boy.png"></Image>
+                    <AppBarButton Icon="Camera" Click="ButtonBase_TakePhotoOnClick">SNAP</AppBarButton>
+                    <TextBox x:Name="AvatarUrl" Visibility="Collapsed"></TextBox>
+                </StackPanel>
+                <StackPanel x:Name="GeneralInfo" RelativePanel.RightOf="Photo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBox x:Name="FirstName" Header= "First Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                    <TextBox x:Name="LastName" Header= "Last Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                    <TextBox x:Name="Gender" Header= "Gender" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                    <DatePicker x:Name="Birthday" Header= "Birthday" HorizontalAlignment="Left" Margin="0,24,0,0"/>
+                    <TextBox x:Name="Introduction" Header= "Introduction" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                </StackPanel>
+                <StackPanel x:Name="Associate" RelativePanel.RightOf="GeneralInfo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
+                    <TextBox x:Name="Phone" Header= "Phone" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                    <TextBox x:Name="Address" Header= "Address" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                    <TextBox x:Name="Email" Header= "Email" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                    <PasswordBox x:Name="Password" Header= "Password" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></PasswordBox>
+                    <StackPanel Orientation="Horizontal">
+                        <Button Click="ButtonBase_RegisterClick" Content="Save" Margin="0,24"/>
+                    </StackPanel>
+                </StackPanel>
+            </RelativePanel>
+        </Grid>
     </ScrollViewer>
 </Page>

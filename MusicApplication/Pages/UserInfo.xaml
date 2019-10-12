@@ -7,8 +7,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <Grid>
-        <TextBox x:Name="MyTextInfo"></TextBox>
-    </Grid>
+    <ScrollViewer Margin="20">
+        <Grid Background="White">
+            <StackPanel x:Name="Info" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <Image x:Name="avatar" Width="200" Height="200"></Image>
+                <TextBlock x:Name="firstName"></TextBlock>
+                <TextBlock x:Name="lastName"></TextBlock>
+                <TextBlock x:Name="gender"></TextBlock>
+                <TextBlock x:Name="introduction"></TextBlock>
+            </StackPanel>
+        </Grid>
+    </ScrollViewer>
 </Page>

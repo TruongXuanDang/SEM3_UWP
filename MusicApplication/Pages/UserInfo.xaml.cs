@@ -1,6 +1,11 @@
-﻿using Windows.UI.Xaml.Controls;
+﻿using System;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using MusicApplication.Constant;
+using MusicApplication.Entities;
 using MusicApplication.Services;
+using Newtonsoft.Json;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -19,7 +24,14 @@ namespace MusicApplication.Pages
             this.fileService = new FileService();
             this.memberService = new MemberService();
 
-            MyTextInfo.Text = memberService.GetInformation(fileService.ReadFromTxtFile());
+            var jsonResult = memberService.GetInformation(fileService.ReadFromTxtFile());
+            var resUser = JsonConvert.DeserializeObject<User>(jsonResult);
+
+            avatar.Source = new BitmapImage(new Uri(resUser.avatar));
+            firstName.Text = resUser.firstName;
+            lastName.Text = resUser.lastName;
+            gender.Text = (resUser.gender).ToString();
+            introduction.Text = resUser.introduction;
         }
     }
 }
