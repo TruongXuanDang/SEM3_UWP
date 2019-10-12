@@ -1,27 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using MusicApplication.Constant;
 using MusicApplication.Entities;
+using Newtonsoft.Json;
 
 namespace MusicApplication.Services
 {
     class MemberService:IMemberService
     {
-        public string Login(string username, string password)
+        public string Login(LoginMember member)
         {
-            throw new NotImplementedException();
+            HttpClient httpClient = new HttpClient();
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(member),Encoding.UTF8,"application/json");
+            var httpRequestMessage = httpClient.PostAsync(ApiUrl.API_LOGIN, content);
+            var jsonResult = httpRequestMessage.Result.Content.ReadAsStringAsync().Result;
+            return jsonResult;
         }
 
-        public User Register(User user)
+        public string Register(User user)
         {
-            throw new NotImplementedException();
+            HttpClient httpClient = new HttpClient();
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(user),Encoding.UTF8,"application/json");
+            var httpRequestMessage = httpClient.PostAsync(ApiUrl.API_REGISTER, content);
+            var jsonResult = httpRequestMessage.Result.Content.ReadAsStringAsync().Result;
+            return jsonResult;
         }
 
-        public User GetInformation(string token)
+        public string GetInformation(string token)
         {
-            throw new NotImplementedException();
+            HttpClient httpClient = new HttpClient();
+            httpClient.DefaultRequestHeaders.Add("Authorization", "Basic " + token);
+            var httpRequestMessage = httpClient.GetAsync(ApiUrl.API_GET_INFO);
+            var jsonResult = httpRequestMessage.Result.Content.ReadAsStringAsync().Result;
+            return jsonResult;
         }
     }
 }

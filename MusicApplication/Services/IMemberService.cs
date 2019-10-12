@@ -9,8 +9,8 @@ namespace MusicApplication.Services
 {
     interface IMemberService
     {
-        String Login(String username, String password);
-        User Register(User user);
-        User GetInformation(String token);
+        string Login(LoginMember member);
+        string Register(User user);
+        string GetInformation(string token);
     }
 }

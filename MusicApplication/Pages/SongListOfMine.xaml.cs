@@ -1,25 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
+using MusicApplication.Constant;
 using MusicApplication.Entities;
-using System.Net.Http;
-using System.Net.Http.Headers;
-using System.Threading.Tasks;
-using Windows.Media.Core;
-using Newtonsoft.Json;
-using Windows.Media.Playback;
+using MusicApplication.Services;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,33 +14,20 @@ namespace MusicApplication.Pages
     /// </summary>
     public sealed partial class SongListOfMine : Page
     {
-        private const string apiGetSongList = "https://2-dot-backup-server-003.appspot.com/_api/v2/songs/get-mine";
+        private FileService fileService;
+        private SongService songService;
         public ObservableCollection<Song> ListSongs = new ObservableCollection<Song>();
         public SongListOfMine()
         {
             this.InitializeComponent();
-            var httpClient = new HttpClient();
-            httpClient.DefaultRequestHeaders.Add("Authorization", ReadFromTXTFile());
-            //Task<HttpResponseMessage> httpRequestMessageToGetSongList = httpClient.GetAsync(apiGetSongList);
-            Task<HttpResponseMessage> httpRequestMessageToGetSongList = httpClient.GetAsync(apiGetSongList);
-            var jsonResultToGetSongList = httpRequestMessageToGetSongList.Result.Content.ReadAsStringAsync().Result;
-            ObservableCollection<Song> listSong = JsonConvert.DeserializeObject<ObservableCollection<Song>>(jsonResultToGetSongList);
+            this.fileService = new FileService();
+            this.songService = new SongService();
+
+            ObservableCollection<Song> listSong = songService.GetSongs(fileService.ReadFromTxtFile(),ApiUrl.API_GET_ALL_MY_SONG);
             foreach (Song song in listSong)
             {
-
                 ListSongs.Add(song);
             }
-        }
-
-        public string ReadFromTXTFile()
-        {
-            Windows.Storage.StorageFolder storageFolder =
-                Windows.Storage.ApplicationData.Current.LocalFolder;
-            Windows.Storage.StorageFile sampleFile =
-                storageFolder.GetFileAsync("sample.txt").GetAwaiter().GetResult();
-
-            string text = Windows.Storage.FileIO.ReadTextAsync(sampleFile).GetAwaiter().GetResult();
-            return text;
         }
 
         private void ListOfSongs_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -64,14 +35,9 @@ namespace MusicApplication.Pages
             try
             {
                 ListView view = (ListView)sender;
-                Song clicked = view.SelectedItem as Song;
-                MediaPlayer player = new MediaPlayer();
-                string path = clicked.link;
-                Uri outUri;
+                Song clickedSong = view.SelectedItem as Song;
 
-                Uri uri = new Uri(path);
-                MediaSource mediaSource = MediaSource.CreateFromUri(uri);
-                mediaPlayer.Source = mediaSource;
+                mediaPlayer.Source = songService.GetMediaSourceToPlaySong(clickedSong);
                 mediaPlayer.MediaPlayer.Play();
 
             }

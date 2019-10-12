@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.ObjectModel;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using MusicApplication.Entities;
-using Newtonsoft.Json;
-using Windows.Media.Core;
-using Windows.Media.Playback;
 using Windows.UI.Xaml;
+using MusicApplication.Constant;
+using MusicApplication.Services;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -18,7 +15,8 @@ namespace MusicApplication.Pages
     /// </summary>
     public sealed partial class SongList : Page
     {
-        private const string apiGetSongList = "https://2-dot-backup-server-003.appspot.com/_api/v2/songs/get-free-songs";
+        private SongService songService;
+        private FileService fileService;
         public ObservableCollection<Song> ListSongs = new ObservableCollection<Song>();
         public bool PlayingStatus = false;
         public int CurrentSongIndex = 0;
@@ -26,11 +24,10 @@ namespace MusicApplication.Pages
         public SongList()
         {
             this.InitializeComponent();
+            this.songService = new SongService();
+            this.fileService = new FileService();
 
-            var httpClient = new HttpClient();
-            Task<HttpResponseMessage> httpRequestMessageToGetSongList = httpClient.GetAsync(apiGetSongList);
-            var jsonResultToGetSongList = httpRequestMessageToGetSongList.Result.Content.ReadAsStringAsync().Result;
-            ObservableCollection<Song> listSong = JsonConvert.DeserializeObject<ObservableCollection<Song>>(jsonResultToGetSongList);
+            ObservableCollection<Song> listSong = songService.GetSongs(fileService.ReadFromTxtFile(),ApiUrl.API_GET_ALL_SONG);
             foreach (Song song in listSong)
             {
                 ListSongs.Add(song);
@@ -43,17 +40,10 @@ namespace MusicApplication.Pages
             try
             {
                 ListView view = (ListView) sender;
-                Song clicked = view.SelectedItem as Song;
-                string path = clicked.link;
-
-                Uri uri = new Uri(path);
-                MediaSource mediaSource = MediaSource.CreateFromUri(uri);
-                mediaPlayer.Source = mediaSource;
-                mediaPlayer.MediaPlayer.Play();
-                
-                PlayingStatus = true;
-                StatusButton.Icon = new SymbolIcon(Symbol.Pause);
-                CurrentSongIndex = ListSongs.IndexOf(clicked);
+                Song clickedSong = view.SelectedItem as Song;
+                mediaPlayer.Source = songService.GetMediaSourceToPlaySong(clickedSong);
+                PlaySong();
+                CurrentSongIndex = ListSongs.IndexOf(clickedSong);
             }
             catch (Exception exception)
             {
@@ -72,27 +62,20 @@ namespace MusicApplication.Pages
                 CurrentSongIndex = ListSongs.Count - 1;
             }
 
-            string path = ListSongs[CurrentSongIndex].link;
-            Uri uri = new Uri(path);
-            MediaSource mediaSource = MediaSource.CreateFromUri(uri);
-            mediaPlayer.Source = mediaSource;
+            mediaPlayer.Source = songService.GetMediaSourceToPlaySong(ListSongs[CurrentSongIndex]);
             ListOfSongs.SelectedIndex = CurrentSongIndex;
-            mediaPlayer.MediaPlayer.Play();
+            PlaySong();
         }
 
         private void StatusButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (PlayingStatus == false)
             {
-                mediaPlayer.MediaPlayer.Play();
-                PlayingStatus = true;
-                StatusButton.Icon = new SymbolIcon(Symbol.Pause);
+                PlaySong();
             }
             else
             {
-                mediaPlayer.MediaPlayer.Pause();
-                PlayingStatus = false;
-                StatusButton.Icon = new SymbolIcon(Symbol.Play);
+                PauseSong();
             }
         }
 
@@ -107,12 +90,23 @@ namespace MusicApplication.Pages
                 CurrentSongIndex = 0;
             }
 
-            string path = ListSongs[CurrentSongIndex].link;
-            Uri uri = new Uri(path);
-            MediaSource mediaSource = MediaSource.CreateFromUri(uri);
-            mediaPlayer.Source = mediaSource;
+            mediaPlayer.Source = songService.GetMediaSourceToPlaySong(ListSongs[CurrentSongIndex]);
             ListOfSongs.SelectedIndex = CurrentSongIndex;
+            PlaySong();
+        }
+
+        private void PauseSong()
+        {
+            mediaPlayer.MediaPlayer.Pause();
+            PlayingStatus = false;
+            StatusButton.Icon = new SymbolIcon(Symbol.Play);
+        }
+
+        private void PlaySong()
+        {
             mediaPlayer.MediaPlayer.Play();
+            PlayingStatus = true;
+            StatusButton.Icon = new SymbolIcon(Symbol.Pause);
         }
     }
 }

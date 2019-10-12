@@ -1,14 +1,9 @@
-﻿using System;
-using System.Diagnostics;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using MusicApplication.Entities;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Newtonsoft.Json;
-using Windows.Storage;
 using Windows.UI.Xaml.Navigation;
+using MusicApplication.Services;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -19,10 +14,13 @@ namespace MusicApplication.Pages
     /// </summary>
     public sealed partial class Login : Page
     {
-        private const string api = "https://2-dot-backup-server-003.appspot.com/_api/v2/members/authentication";
+        private FileService fileService;
+        private MemberService memberService;
         public Login()
         {
             this.InitializeComponent();
+            this.fileService = new FileService();
+            this.memberService = new MemberService();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
@@ -33,29 +31,14 @@ namespace MusicApplication.Pages
                 email = Username.Text,
                 password = Password.Password,
             };
-            var httpClient = new HttpClient();
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(member), Encoding.UTF8, "application/json");
-            Task<HttpResponseMessage> httpRequestMessage = httpClient.PostAsync(api, content);
-            var jsonResult = httpRequestMessage.Result.Content.ReadAsStringAsync().Result;
+
+            var jsonResult = memberService.Login(member);
 
             var resMember = JsonConvert.DeserializeObject<LoginMember>(jsonResult);
             var token = resMember.token;
 
-            var sampleFile = WriteIntoTxtFile(token);
-            Debug.WriteLine(sampleFile.Path);
-        }
-
-        public StorageFile WriteIntoTxtFile(string token)
-        {
-            Windows.Storage.StorageFolder storageFolder =
-                Windows.Storage.ApplicationData.Current.LocalFolder;
-
-            Windows.Storage.StorageFile sampleFile =
-                storageFolder.CreateFileAsync("sample.txt",
-                    Windows.Storage.CreationCollisionOption.ReplaceExisting).GetAwaiter().GetResult();
-
-            Windows.Storage.FileIO.WriteTextAsync(sampleFile, token).GetAwaiter().GetResult();
-            return sampleFile;
+            var sampleFile = fileService.WriteIntoTxtFile(token);
+            var pathOfSampleFile = sampleFile.Path;
         }
     }
 }
