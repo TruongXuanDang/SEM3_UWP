@@ -35,9 +35,6 @@ namespace MusicApplication.Pages
         private readonly List<(string Tag, Type Page)> _pages = new List<(string Tag, Type Page)>
         {
             ("home", typeof(SongList)),
-            ("login", typeof(Login)),
-            ("register", typeof(Register)),
-            ("privateInfo", typeof(UserInfo)),
             ("privateInfo", typeof(UserInfo)),
             ("insertSong", typeof(SongCreate)),
             ("mySongs", typeof(SongListOfMine)),
@@ -53,7 +50,7 @@ namespace MusicApplication.Pages
             // If navigation occurs on SelectionChanged, this isn't needed.
             // Because we use ItemInvoked to navigate, we need to call Navigate
             // here to load the home page.
-            NavView_Navigate("login", new EntranceNavigationTransitionInfo());
+            NavView_Navigate("privateInfo", new EntranceNavigationTransitionInfo());
 
             // Add keyboard accelerators for backwards navigation.
             var goBack = new KeyboardAccelerator { Key = VirtualKey.GoBack };
@@ -84,30 +81,13 @@ namespace MusicApplication.Pages
             }
         }
 
-        // NavView_SelectionChanged is not used in this example, but is shown for completeness.
-        // You will typically handle either ItemInvoked or SelectionChanged to perform navigation,
-        // but not both.
-        public void NavView_SelectionChanged(NavigationView sender,
-                                              NavigationViewSelectionChangedEventArgs args)
-        {
-            if (args.IsSettingsSelected == true)
-            {
-                NavView_Navigate("settings", args.RecommendedNavigationTransitionInfo);
-            }
-            else if (args.SelectedItemContainer != null)
-            {
-                var navItemTag = args.SelectedItemContainer.Tag.ToString();
-                NavView_Navigate(navItemTag, args.RecommendedNavigationTransitionInfo);
-            }
-        }
-
         private void NavView_Navigate(string navItemTag, NavigationTransitionInfo transitionInfo)
         {
 
             Type _page = null;
             if (navItemTag == "settings")
             {
-                _page = typeof(SongList);
+                this.Frame.Navigate(typeof(Login));
             }
             else
             {
@@ -174,6 +154,11 @@ namespace MusicApplication.Pages
                 NavView.Header =
                     ((NavigationViewItem)NavView.SelectedItem)?.Content?.ToString();
             }
+        }
+
+        private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Login));
         }
     }
 }

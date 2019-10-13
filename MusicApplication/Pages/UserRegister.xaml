@@ -6,42 +6,47 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-    <ScrollViewer Margin="20">
-        <Grid Background="White">
-            <RelativePanel>
-                <StackPanel x:Name="Photo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <Image x:Name="Avatar" Width="200" Height="200" Source="/Sources/boy.png"></Image>
-                    <AppBarButton Icon="Camera" Click="ButtonBase_TakePhotoOnClick">SNAP</AppBarButton>
-                    <TextBox x:Name="AvatarUrl" Visibility="Collapsed" Text="ms-appx:///Sources/boy.png"></TextBox>
-                    <TextBlock x:Name="AvatarUrlMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
+    <Grid VerticalAlignment="Center">
+
+        <TextBlock Text="Register" FontSize="36"  TextAlignment="Center"/>
+        <RelativePanel HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,50,0,0">
+            <StackPanel x:Name="Photo" Margin="20" VerticalAlignment="Top">
+                <Image x:Name="Avatar" Width="200" Height="200" Source="/Sources/boy.png"></Image>
+                <AppBarButton Icon="Camera" Click="ButtonBase_TakePhotoOnClick" HorizontalAlignment="Center">SNAP</AppBarButton>
+                <TextBox x:Name="AvatarUrl" Visibility="Collapsed" Text="ms-appx:///Sources/boy.png"></TextBox>
+                <TextBlock x:Name="AvatarUrlMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
+            </StackPanel>
+            <StackPanel x:Name="GeneralInfo" RelativePanel.RightOf="Photo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBox x:Name="FirstName" Header= "First Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                <TextBlock x:Name="FirstNameMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
+                <TextBox x:Name="LastName" Header= "Last Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                <TextBlock x:Name="LastNameMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
+                <TextBlock x:Name="GenderLabel" Text="Gender" Margin="0,24,0,0" Width="400" HorizontalAlignment="Left"></TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <RadioButton Content="Male" Tag="Male" Checked="BGRadioButton_Checked" IsChecked="True"/>
+                    <RadioButton Content="Female" Tag="Female" Checked="BGRadioButton_Checked"/>
+                    <RadioButton Content="Other" Tag="Other" Checked="BGRadioButton_Checked"/>
                 </StackPanel>
-                <StackPanel x:Name="GeneralInfo" RelativePanel.RightOf="Photo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <TextBox x:Name="FirstName" Header= "First Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock x:Name="FirstNameMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
-                    <TextBox x:Name="LastName" Header= "Last Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock x:Name="LastNameMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
-                    <TextBlock x:Name="GenderLabel" Text="Gender" Margin="0,24,0,0" Width="400" HorizontalAlignment="Left"></TextBlock>
-                    <StackPanel Orientation="Horizontal">
-                        <RadioButton Content="Male" Tag="Male" Checked="BGRadioButton_Checked" IsChecked="True"/>
-                        <RadioButton Content="Female" Tag="Female" Checked="BGRadioButton_Checked"/>
-                        <RadioButton Content="Other" Tag="Other" Checked="BGRadioButton_Checked"/>
-                    </StackPanel>
-                    <DatePicker x:Name="Birthday" Header= "Birthday" HorizontalAlignment="Left" Margin="0,24,0,0"/>
-                    <TextBlock x:Name="BirthdayMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
-                    <TextBox x:Name="Introduction" Header= "Introduction" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
-                </StackPanel>
-                <StackPanel x:Name="Associate" RelativePanel.RightOf="GeneralInfo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
-                    <TextBox x:Name="Phone" Header= "Phone" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
-                    <TextBox x:Name="Address" Header= "Address" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
-                    <TextBox x:Name="Email" Header= "Email" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
-                    <TextBlock x:Name="EmailMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
-                    <PasswordBox x:Name="Password" Header= "Password" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></PasswordBox>
-                    <TextBlock x:Name="PasswordMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
-                    <StackPanel Orientation="Horizontal">
-                        <Button Click="ButtonBase_RegisterClick" Content="Save" Margin="0,24"/>
-                    </StackPanel>
-                </StackPanel>
-            </RelativePanel>
-        </Grid>
-    </ScrollViewer>
+                <DatePicker x:Name="Birthday" Header= "Birthday" HorizontalAlignment="Left" Margin="0,24,0,0"/>
+                <TextBlock x:Name="BirthdayMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
+                <TextBox x:Name="Introduction" Header= "Introduction" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+            </StackPanel>
+            <StackPanel x:Name="Associate" RelativePanel.RightOf="GeneralInfo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
+                <TextBox x:Name="Phone" Header= "Phone" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                <TextBox x:Name="Address" Header= "Address" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                <TextBox x:Name="Email" Header= "Email" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                <TextBlock x:Name="EmailMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
+                <PasswordBox x:Name="Password" Header= "Password" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></PasswordBox>
+                <TextBlock x:Name="PasswordMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
+
+                <Button Click="ButtonBase_RegisterClick" Content="Save" Width="80" HorizontalAlignment="Center" Margin="0,20" Background="DodgerBlue" Foreground="White"/>
+                <TextBlock
+                    Foreground="DodgerBlue"
+                    TextAlignment="Center" VerticalAlignment="Center" FontSize="16" Tapped="UIElement_OnTapped">Back to Login</TextBlock>
+            </StackPanel>
+
+        </RelativePanel>
+
+    </Grid>
+
 </Page>

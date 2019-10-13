@@ -11,6 +11,7 @@ using System.Net;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Diagnostics;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MusicApplication.Services;
@@ -171,6 +172,11 @@ namespace MusicApplication.Pages
                     
                 }
             }
+        }
+
+        private void UIElement_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Login));
         }
     }
 }

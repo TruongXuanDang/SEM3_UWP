@@ -2,7 +2,6 @@
     x:Class="MusicApplication.Pages.NavigationView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MusicApplication.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -14,30 +13,20 @@
                          ItemInvoked="NavView_ItemInvoked"
                          BackRequested="NavView_BackRequested">
             <NavigationView.MenuItems>
-                <NavigationViewItem Tag="home" Icon="Home" Content="Home" x:Name="HomePage"/>
-                <NavigationViewItemSeparator/>
-                <NavigationViewItemHeader x:Name="MainPagesHeader"
-                                           Content="Main pages"/>
-                <NavigationViewItem Tag="login" Content="Login" Icon="Permissions" />
-                <NavigationViewItem Tag="register" Content="Register" Icon="AddFriend" />
-                <NavigationViewItem Tag="privateInfo" Icon="ContactInfo" Content="Private Info"/>
-                <NavigationViewItemSeparator/>
+                <NavigationViewItem Tag="privateInfo" Icon="ContactInfo" Content="Private Info" HorizontalContentAlignment="Center"/>
                 <NavigationViewItemHeader x:Name="SongListHeader"
-                                          Content="Songs"/>
-                <NavigationViewItem Tag="insertSong" Icon="MusicInfo" Content="Insert song"/>
-                <NavigationViewItem Tag="mySongs" Icon="Audio" Content="My Songs"/>
+                                          Content="Songs" HorizontalContentAlignment="Center"/>
+                <NavigationViewItem Tag="home" Icon="Home" Content="Home" x:Name="HomePage" HorizontalContentAlignment="Center"/>
+                <NavigationViewItem Tag="insertSong" Icon="MusicInfo" Content="Insert song" HorizontalContentAlignment="Center"/>
+                <NavigationViewItem Tag="mySongs" Icon="Audio" Content="My Songs" HorizontalContentAlignment="Center"/>
             </NavigationView.MenuItems>
 
-            <NavigationView.AutoSuggestBox>
-                <!-- See AutoSuggestBox documentation for
-                 more info about how to implement search. -->
-                <AutoSuggestBox x:Name="NavViewSearchBox" QueryIcon="Find"/>
-            </NavigationView.AutoSuggestBox>
 
-         
-                <Frame x:Name="ContentFrame" Padding="12,0,12,24" IsTabStop="True"
+
+            <Frame x:Name="ContentFrame" Padding="12,0,12,24" IsTabStop="True"
                    NavigationFailed="ContentFrame_NavigationFailed"/>
-        
+
+
         </NavigationView>
 
         <VisualStateManager.VisualStateGroups>

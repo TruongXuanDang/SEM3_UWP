@@ -6,23 +6,24 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
-    <ScrollViewer Margin="20">
-        <StackPanel x:Name="UserLogin" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
-            <TextBox x:Name="Email" Header= "Email" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel x:Name="UserLogin" Margin="20"  Orientation="Vertical">
+            <TextBlock Text="Login" FontSize="36" Margin="4" TextAlignment="Center"/>
+            <TextBox x:Name="Email" Header= "Email" Margin="0,24,0,0" MaxLength="320" Width="400" ></TextBox>
             <TextBlock x:Name="EmailMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
-            <PasswordBox x:Name="Password" Header= "Password" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></PasswordBox>
+            <PasswordBox x:Name="Password" Header= "Password" Margin="0,24,0,0" MaxLength="320" Width="400" ></PasswordBox>
             <TextBlock x:Name="PasswordMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
-            <StackPanel Orientation="Horizontal">
-                <TextBlock>
-                    <Run Text="If you do not have an account, please "/>
-                    <Run/>
-                </TextBlock>
-                <TextBlock Foreground="Maroon" SelectionHighlightColor="Blue" Tapped="TextBlock_OnSelectionChanged">Register</TextBlock>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal">
-                <Button Click="ButtonBase_OnClick" Content="Login" Margin="0,24"/>
-            </StackPanel>
+            <TextBlock TextAlignment="Center" VerticalAlignment="Center" FontSize="16" Text="Don't have an account?"/>
+            <TextBlock
+                   Foreground="DodgerBlue"
+                   TextAlignment="Center" VerticalAlignment="Center" FontSize="16" Tapped="TextBlock_OnSelectionChanged">Register now</TextBlock>
+
+            <Button Click="ButtonBase_OnClick" Content="Login" Width="80" HorizontalAlignment="Center" Margin="0,20" Background="DodgerBlue" Foreground="White"/>
+            <Border x:Name="PassportStatus" Background="#22B14C"
+                    Margin="0,20" Height="100" >
+                <TextBlock x:Name="PassportStatusText" Text="Please login to use this music app!"
+                           Margin="4" TextAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
+            </Border>
         </StackPanel>
-    </ScrollViewer>
+    </Grid>
 </Page>

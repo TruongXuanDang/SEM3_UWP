@@ -48,7 +48,7 @@ namespace MusicApplication.Pages
                 var pathOfSampleFile = sampleFile.Path;
                 validateService.ValidateTrue();
                 this.NavigationCacheMode = NavigationCacheMode.Disabled;
-                this.Frame.Navigate(typeof(UserInfo));
+                this.Frame.Navigate(typeof(NavigationView));
             }
             else
             {

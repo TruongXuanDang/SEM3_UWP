@@ -26,8 +26,7 @@ namespace MusicApplication.Pages
             var resUser = JsonConvert.DeserializeObject<User>(jsonResult);
 
             avatar.ImageSource = new BitmapImage(new Uri(resUser.avatar));
-            firstName.Text = resUser.firstName;
-            lastName.Text = resUser.lastName;
+            name.Text = resUser.firstName+" "+ resUser.lastName;
             switch (resUser.gender)
             {
                 case 0:
@@ -41,6 +40,10 @@ namespace MusicApplication.Pages
                     break;
             }
             introduction.Text = resUser.introduction;
+            birthday.Text = resUser.birthday.Substring(0,10);
+            phone.Text = resUser.phone;
+            address.Text = resUser.address;
+            email.Text = resUser.email;
         }
     }
 }
