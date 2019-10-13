@@ -39,7 +39,7 @@ namespace MusicApplication.Entities
             {
                 errors.Add("link", "Link is required!");
             }
-            else if (!Regex.IsMatch(link, ApiRegex.LINK_MP3_REGEX))
+            else if (!link.Contains(".mp3"))
             {
                 errors.Add("link", "Link need to be ended with '.mp3'");
             }

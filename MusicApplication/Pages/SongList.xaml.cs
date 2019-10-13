@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.ObjectModel;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using MusicApplication.Entities;
 using Windows.UI.Xaml;
@@ -27,7 +28,7 @@ namespace MusicApplication.Pages
             this.songService = new SongService();
             this.fileService = new FileService();
 
-            ObservableCollection<Song> listSong = songService.GetSongs(fileService.ReadFromTxtFile(),ApiUrl.API_GET_ALL_SONG);
+            ObservableCollection<Song> listSong = songService.GetSongs(fileService.ReadFromTxtFile(), ApiUrl.API_GET_ALL_SONG);
             foreach (Song song in listSong)
             {
                 ListSongs.Add(song);
@@ -35,24 +36,25 @@ namespace MusicApplication.Pages
         }
 
 
-        private void ListOfSongs_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private async void ListOfSongs_OnSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ListView view = (ListView)sender;
+            Song clickedSong = view.SelectedItem as Song;
+            CurrentSongIndex = ListSongs.IndexOf(clickedSong);
+            ControlLabel.Text = clickedSong.name + " is playing...";
             try
             {
-                ListView view = (ListView) sender;
-                Song clickedSong = view.SelectedItem as Song;
                 mediaPlayer.Source = songService.GetMediaSourceToPlaySong(clickedSong);
                 PlaySong();
-                CurrentSongIndex = ListSongs.IndexOf(clickedSong);
-                ControlLabel.Text = clickedSong.name + " is playing...";
             }
             catch (Exception exception)
             {
-                
+                MessageDialog dialog = new MessageDialog(exception.Message);
+                await dialog.ShowAsync();
             }
         }
 
-        private void PreviousButton_OnClick(object sender, RoutedEventArgs e)
+        private async void PreviousButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (CurrentSongIndex <= ListSongs.Count - 1 && 0 < CurrentSongIndex)
             {
@@ -63,9 +65,18 @@ namespace MusicApplication.Pages
                 CurrentSongIndex = ListSongs.Count - 1;
             }
 
-            mediaPlayer.Source = songService.GetMediaSourceToPlaySong(ListSongs[CurrentSongIndex]);
             ListOfSongs.SelectedIndex = CurrentSongIndex;
-            PlaySong();
+            try
+            {
+                mediaPlayer.Source = songService.GetMediaSourceToPlaySong(ListSongs[CurrentSongIndex]);
+                PlaySong();
+
+            }
+            catch (Exception exception)
+            {
+                MessageDialog dialog = new MessageDialog(exception.Message);
+                await dialog.ShowAsync();
+            }
         }
 
         private void StatusButton_OnClick(object sender, RoutedEventArgs e)
@@ -80,7 +91,7 @@ namespace MusicApplication.Pages
             }
         }
 
-        private void NextButton_OnClick(object sender, RoutedEventArgs e)
+        private async void NextButton_OnClick(object sender, RoutedEventArgs e)
         {
             if (CurrentSongIndex < ListSongs.Count - 1 && 0 <= CurrentSongIndex)
             {
@@ -91,9 +102,18 @@ namespace MusicApplication.Pages
                 CurrentSongIndex = 0;
             }
 
-            mediaPlayer.Source = songService.GetMediaSourceToPlaySong(ListSongs[CurrentSongIndex]);
             ListOfSongs.SelectedIndex = CurrentSongIndex;
-            PlaySong();
+            try
+            {
+                mediaPlayer.Source = songService.GetMediaSourceToPlaySong(ListSongs[CurrentSongIndex]);
+                PlaySong();
+
+            }
+            catch (Exception exception)
+            {
+                MessageDialog dialog = new MessageDialog(exception.Message);
+                await dialog.ShowAsync();
+            }
         }
 
         private void PauseSong()

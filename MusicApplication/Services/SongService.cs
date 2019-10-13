@@ -25,9 +25,17 @@ namespace MusicApplication.Services
         public MediaSource GetMediaSourceToPlaySong(Song song)
         {
             string path = song.link;
-            Uri uri = new Uri(path);
-            MediaSource mediaSource = MediaSource.CreateFromUri(uri);
-            return mediaSource;
+            try
+            {
+
+                Uri uri = new Uri(path);
+                MediaSource mediaSource = MediaSource.CreateFromUri(uri);
+                return mediaSource;
+            }
+            catch (Exception e)
+            {
+                throw new Exception("link is invalid");
+            }
         }
 
         public string CreateSong(Song song,string token)
