@@ -15,31 +15,31 @@
                 </Ellipse.Fill>
             </Ellipse>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Welcome" Margin="12" FontWeight="Bold"/>
+                <TextBlock Text="Welcome" Margin="12" FontWeight="Bold" Width="90"/>
                 <TextBlock x:Name="name" Margin="12"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Gender" Margin="12" FontWeight="Bold" Width="60"/>
+                <TextBlock Text="Gender" Margin="12" FontWeight="Bold" Width="90"/>
                 <TextBlock x:Name="gender" Margin="12"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Birthday" Margin="12" FontWeight="Bold" Width="60"/>
+                <TextBlock Text="Birthday" Margin="12" FontWeight="Bold" Width="90"/>
                 <TextBlock x:Name="birthday" Margin="12"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Introduction" Margin="12" FontWeight="Bold" Width="60"/>
+                <TextBlock Text="Introduction" Margin="12" FontWeight="Bold" Width="90"/>
                 <TextBlock x:Name="introduction" Margin="12"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Phone" Margin="12" FontWeight="Bold" Width="60"/>
+                <TextBlock Text="Phone" Margin="12" FontWeight="Bold" Width="90"/>
                 <TextBlock x:Name="phone" Margin="12"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Address" Margin="12" FontWeight="Bold" Width="60"/>
+                <TextBlock Text="Address" Margin="12" FontWeight="Bold" Width="90"/>
                 <TextBlock x:Name="address" Margin="12"/>
             </StackPanel>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Email" Margin="12" FontWeight="Bold" Width="60"/>
+                <TextBlock Text="Email" Margin="12" FontWeight="Bold" Width="90"/>
                 <TextBlock x:Name="email" Margin="12"/>
             </StackPanel>
         </StackPanel>

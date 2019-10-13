@@ -8,7 +8,7 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <StackPanel x:Name="MainInfo" Margin="20"  >
+        <StackPanel x:Name="MainInfo" Background="White">
             <TextBox x:Name="Name" Header= "Name" Margin="0,24,0,0" MaxLength="320" Width="400"></TextBox>
             <TextBlock x:Name="NameMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
             <TextBox x:Name="Singer" Header= "Singer" Margin="0,24,0,0" MaxLength="320" Width="400" ></TextBox>
@@ -19,11 +19,6 @@
             <TextBox x:Name="Link" Header= "Link" Margin="0,24,0,0" MaxLength="320" Width="400" ></TextBox>
 
             <Button Click="ButtonBase_OnClick" Content="Save" Width="80" HorizontalAlignment="Center" Margin="0,20" Background="DodgerBlue" Foreground="White"/>
-            <Border x:Name="PassportStatus" Background="#22B14C"
-                        Margin="0,20" Height="100" >
-                <TextBlock x:Name="PassportStatusText" Text="Come to My songs to see your Playlist!"
-                               Margin="4" TextAlignment="Center" VerticalAlignment="Center" FontSize="20"/>
-            </Border>
         </StackPanel>
     </Grid>
 </Page>
