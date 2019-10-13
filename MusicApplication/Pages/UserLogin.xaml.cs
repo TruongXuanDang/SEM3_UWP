@@ -47,7 +47,8 @@ namespace MusicApplication.Pages
                 var sampleFile = fileService.WriteIntoTxtFile(token);
                 var pathOfSampleFile = sampleFile.Path;
                 validateService.ValidateTrue();
-                this.Frame.Navigate(typeof(SongList));
+                this.NavigationCacheMode = NavigationCacheMode.Disabled;
+                this.Frame.Navigate(typeof(UserInfo));
             }
             else
             {

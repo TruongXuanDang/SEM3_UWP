@@ -44,6 +44,7 @@ namespace MusicApplication.Pages
             {
                 songService.CreateSong(song, fileService.ReadFromTxtFile());
                 validateService.ValidateTrue();
+                this.NavigationCacheMode = NavigationCacheMode.Disabled;
                 this.Frame.Navigate(typeof(SongListOfMine));
             }
             else

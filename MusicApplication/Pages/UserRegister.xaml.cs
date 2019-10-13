@@ -129,6 +129,7 @@ namespace MusicApplication.Pages
             {
                 memberService.Register(user);
                 validateService.ValidateTrue();
+                this.NavigationCacheMode = NavigationCacheMode.Disabled;
                 this.Frame.Navigate(typeof(Login));
             }
             else
@@ -155,14 +156,17 @@ namespace MusicApplication.Pages
                     case "Male":
                         gender = 0;
                         Avatar.Source = new BitmapImage(new Uri("ms-appx:///Sources/boy.png"));
+                        AvatarUrl.Text = "ms-appx:///Sources/boy.png";
                         break;
                     case "Female":
                         gender = 1;
                         Avatar.Source = new BitmapImage(new Uri("ms-appx:///Sources/girl.png"));
+                        AvatarUrl.Text = "ms-appx:///Sources/girl.png";
                         break;
                     case "Other":
                         gender = 2;
                         Avatar.Source = new BitmapImage(new Uri("ms-appx:///Sources/other.png"));
+                        AvatarUrl.Text = "ms-appx:///Sources/other.png";
                         break;
                     
                 }

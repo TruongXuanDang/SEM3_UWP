@@ -24,7 +24,7 @@
                 <NavigationViewItemSeparator/>
                 <NavigationViewItemHeader x:Name="SongListHeader"
                                           Content="Songs"/>
-                <NavigationViewItem Tag="insertSong" Icon="MusicInfo" Content="Insert"/>
+                <NavigationViewItem Tag="insertSong" Icon="MusicInfo" Content="Insert song"/>
                 <NavigationViewItem Tag="mySongs" Icon="Audio" Content="My Songs"/>
             </NavigationView.MenuItems>
 
