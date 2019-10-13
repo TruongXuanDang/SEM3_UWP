@@ -25,10 +25,21 @@ namespace MusicApplication.Pages
             var jsonResult = memberService.GetInformation(fileService.ReadFromTxtFile());
             var resUser = JsonConvert.DeserializeObject<User>(jsonResult);
 
-            avatar.Source = new BitmapImage(new Uri(resUser.avatar));
+            avatar.ImageSource = new BitmapImage(new Uri(resUser.avatar));
             firstName.Text = resUser.firstName;
             lastName.Text = resUser.lastName;
-            gender.Text = (resUser.gender).ToString();
+            switch (resUser.gender)
+            {
+                case 0:
+                    gender.Text = "Male";
+                    break;
+                case 1:
+                    gender.Text = "Female";
+                    break;
+                case 2:
+                    gender.Text = "Other";
+                    break;
+            }
             introduction.Text = resUser.introduction;
         }
     }

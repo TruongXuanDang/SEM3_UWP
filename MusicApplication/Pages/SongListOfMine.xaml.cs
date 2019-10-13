@@ -42,6 +42,7 @@ namespace MusicApplication.Pages
 
                 mediaPlayer.Source = songService.GetMediaSourceToPlaySong(clickedSong);
                 mediaPlayer.MediaPlayer.Play();
+                ControlLabel.Text = clickedSong.name + " is playing...";
 
             }
             catch (Exception exception)

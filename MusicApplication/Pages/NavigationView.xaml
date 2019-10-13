@@ -14,25 +14,17 @@
                          ItemInvoked="NavView_ItemInvoked"
                          BackRequested="NavView_BackRequested">
             <NavigationView.MenuItems>
-                <NavigationViewItem Tag="home" Icon="Home" Content="Home"/>
+                <NavigationViewItem Tag="home" Icon="Home" Content="Home" x:Name="HomePage"/>
                 <NavigationViewItemSeparator/>
                 <NavigationViewItemHeader x:Name="MainPagesHeader"
                                            Content="Main pages"/>
-                <NavigationViewItem Tag="login" Content="Login">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xEB3C;"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem Tag="register" Content="Register">
-                    <NavigationViewItem.Icon>
-                        <FontIcon FontFamily="Segoe MDL2 Assets" Glyph="&#xE7FC;"/>
-                    </NavigationViewItem.Icon>
-                </NavigationViewItem>
-                <NavigationViewItem Tag="privateInfo" Icon="Audio" Content="Private Info"/>
+                <NavigationViewItem Tag="login" Content="Login" Icon="Permissions" />
+                <NavigationViewItem Tag="register" Content="Register" Icon="AddFriend" />
+                <NavigationViewItem Tag="privateInfo" Icon="ContactInfo" Content="Private Info"/>
                 <NavigationViewItemSeparator/>
                 <NavigationViewItemHeader x:Name="SongListHeader"
                                           Content="Songs"/>
-                <NavigationViewItem Tag="insertSong" Icon="Audio" Content="Insert"/>
+                <NavigationViewItem Tag="insertSong" Icon="MusicInfo" Content="Insert"/>
                 <NavigationViewItem Tag="mySongs" Icon="Audio" Content="My Songs"/>
             </NavigationView.MenuItems>
 

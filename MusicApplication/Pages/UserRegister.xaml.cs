@@ -11,6 +11,7 @@ using System.Net;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Diagnostics;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using MusicApplication.Services;
 
@@ -108,6 +109,7 @@ namespace MusicApplication.Pages
 
         private async void ButtonBase_RegisterClick(object sender, RoutedEventArgs e)
         {
+            
             var user = new User
             {
                 firstName = FirstName.Text,
@@ -127,6 +129,7 @@ namespace MusicApplication.Pages
             {
                 memberService.Register(user);
                 validateService.ValidateTrue();
+                this.Frame.Navigate(typeof(Login));
             }
             else
             {
@@ -135,6 +138,7 @@ namespace MusicApplication.Pages
                 validateService.ValidateFalse(EmailMessage, errors,"email");
                 validateService.ValidateFalse(PasswordMessage, errors,"password");
                 validateService.ValidateFalse(BirthdayMessage, errors,"birthday");
+                validateService.ValidateFalse(AvatarUrlMessage,errors,"avatar");
 
             }
         }
@@ -150,12 +154,15 @@ namespace MusicApplication.Pages
                 {
                     case "Male":
                         gender = 0;
+                        Avatar.Source = new BitmapImage(new Uri("ms-appx:///Sources/boy.png"));
                         break;
                     case "Female":
                         gender = 1;
+                        Avatar.Source = new BitmapImage(new Uri("ms-appx:///Sources/girl.png"));
                         break;
                     case "Other":
                         gender = 2;
+                        Avatar.Source = new BitmapImage(new Uri("ms-appx:///Sources/other.png"));
                         break;
                     
                 }

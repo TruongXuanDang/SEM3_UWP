@@ -14,6 +14,13 @@
             <PasswordBox x:Name="Password" Header= "Password" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></PasswordBox>
             <TextBlock x:Name="PasswordMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
             <StackPanel Orientation="Horizontal">
+                <TextBlock>
+                    <Run Text="If you do not have an account, please "/>
+                    <Run/>
+                </TextBlock>
+                <TextBlock Foreground="Maroon" SelectionHighlightColor="Blue" Tapped="TextBlock_OnSelectionChanged">Register</TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
                 <Button Click="ButtonBase_OnClick" Content="Login" Margin="0,24"/>
             </StackPanel>
         </StackPanel>

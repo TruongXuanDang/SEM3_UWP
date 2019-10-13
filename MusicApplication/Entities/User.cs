@@ -50,6 +50,10 @@ namespace MusicApplication.Entities
             {
                 errors.Add("birthday","Birthday is required");
             }
+            if (string.IsNullOrEmpty(avatar))
+            {
+                errors.Add("avatar", "Avatar is required");
+            }
             return errors;
         }
     }

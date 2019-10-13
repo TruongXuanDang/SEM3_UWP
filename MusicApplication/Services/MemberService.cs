@@ -28,8 +28,6 @@ namespace MusicApplication.Services
             HttpContent content = new StringContent(JsonConvert.SerializeObject(user),Encoding.UTF8,"application/json");
             var httpRequestMessage = httpClient.PostAsync(ApiUrl.API_REGISTER, content);
             var jsonResult = httpRequestMessage.Result.Content.ReadAsStringAsync().Result;
-            MessageDialog dialog = new MessageDialog(jsonResult);
-            dialog.ShowAsync().GetAwaiter().GetResult();
             return jsonResult;
         }
 

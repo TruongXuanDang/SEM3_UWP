@@ -176,6 +176,7 @@
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
     <Content Include="Sources\boy.png" />
     <Content Include="Sources\girl.png" />
+    <Content Include="Sources\other.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">

@@ -13,6 +13,7 @@
                     <Image x:Name="Avatar" Width="200" Height="200" Source="/Sources/boy.png"></Image>
                     <AppBarButton Icon="Camera" Click="ButtonBase_TakePhotoOnClick">SNAP</AppBarButton>
                     <TextBox x:Name="AvatarUrl" Visibility="Collapsed"></TextBox>
+                    <TextBlock x:Name="AvatarUrlMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
                 </StackPanel>
                 <StackPanel x:Name="GeneralInfo" RelativePanel.RightOf="Photo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
                     <TextBox x:Name="FirstName" Header= "First Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>

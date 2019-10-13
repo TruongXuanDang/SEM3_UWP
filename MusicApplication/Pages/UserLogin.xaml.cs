@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using Windows.UI.Xaml.Navigation;
 using MusicApplication.Services;
 using System.Collections.Generic;
+using Windows.UI.Xaml.Input;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -46,7 +47,7 @@ namespace MusicApplication.Pages
                 var sampleFile = fileService.WriteIntoTxtFile(token);
                 var pathOfSampleFile = sampleFile.Path;
                 validateService.ValidateTrue();
-
+                this.Frame.Navigate(typeof(SongList));
             }
             else
             {
@@ -54,6 +55,11 @@ namespace MusicApplication.Pages
                 validateService.ValidateFalse(PasswordMessage, errors, "password");
             }
             
+        }
+
+        private void TextBlock_OnSelectionChanged(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(Register));
         }
     }
 }
