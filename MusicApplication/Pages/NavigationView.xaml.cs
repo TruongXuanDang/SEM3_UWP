@@ -53,7 +53,7 @@ namespace MusicApplication.Pages
             // If navigation occurs on SelectionChanged, this isn't needed.
             // Because we use ItemInvoked to navigate, we need to call Navigate
             // here to load the home page.
-            NavView_Navigate("home", new EntranceNavigationTransitionInfo());
+            NavView_Navigate("login", new EntranceNavigationTransitionInfo());
 
             // Add keyboard accelerators for backwards navigation.
             var goBack = new KeyboardAccelerator { Key = VirtualKey.GoBack };

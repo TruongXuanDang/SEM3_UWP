@@ -4,6 +4,7 @@ using MusicApplication.Entities;
 using Newtonsoft.Json;
 using Windows.UI.Xaml.Navigation;
 using MusicApplication.Services;
+using System.Collections.Generic;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -16,11 +17,13 @@ namespace MusicApplication.Pages
     {
         private FileService fileService;
         private MemberService memberService;
+        private ValidateService validateService;
         public Login()
         {
             this.InitializeComponent();
             this.fileService = new FileService();
             this.memberService = new MemberService();
+            this.validateService = new ValidateService();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
@@ -28,17 +31,29 @@ namespace MusicApplication.Pages
         {
             var member = new LoginMember
             {
-                email = Username.Text,
+                email = Email.Text,
                 password = Password.Password,
             };
 
-            var jsonResult = memberService.Login(member);
+            Dictionary<string, string> errors = member.Validate();
+            if (errors.Count == 0)
+            {
+                var jsonResult = memberService.Login(member);
 
-            var resMember = JsonConvert.DeserializeObject<LoginMember>(jsonResult);
-            var token = resMember.token;
+                var resMember = JsonConvert.DeserializeObject<LoginMember>(jsonResult);
+                var token = resMember.token;
 
-            var sampleFile = fileService.WriteIntoTxtFile(token);
-            var pathOfSampleFile = sampleFile.Path;
+                var sampleFile = fileService.WriteIntoTxtFile(token);
+                var pathOfSampleFile = sampleFile.Path;
+                validateService.ValidateTrue();
+
+            }
+            else
+            {
+                validateService.ValidateFalse(EmailMessage, errors, "email");
+                validateService.ValidateFalse(PasswordMessage, errors, "password");
+            }
+            
         }
     }
 }

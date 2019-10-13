@@ -21,9 +21,9 @@ namespace MusicApplication.Entities
             {
                 errors.Add("name", "Name is required!");
             }
-            else if (name.Length < 5 || name.Length > 30)
+            else if (name.Length > 30)
             {
-                errors.Add("name", "Name must be 5 to 30 characters!");
+                errors.Add("name", "Name must be under 30 characters!");
             }
             if (string.IsNullOrEmpty(singer))
             {

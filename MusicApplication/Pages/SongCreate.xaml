@@ -14,6 +14,7 @@
                     <TextBox x:Name="Name" Header= "Name" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
                     <TextBlock x:Name="NameMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
                     <TextBox x:Name="Singer" Header= "Singer" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                    <TextBlock x:Name="SingerMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
                     <TextBox x:Name="Author" Header= "Author" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
                 </StackPanel>
                 <StackPanel x:Name="OtherInfo" RelativePanel.RightOf="MainInfo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">

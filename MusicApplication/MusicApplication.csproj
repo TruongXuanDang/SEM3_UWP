@@ -119,6 +119,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Constant\ApiRegex.cs" />
     <Compile Include="Constant\ApiUrl.cs" />
     <Compile Include="Entities\LoginMember.cs" />
     <Compile Include="Entities\Song.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Services\ISongService.cs" />
     <Compile Include="Services\IMemberService.cs" />
     <Compile Include="Services\MemberService.cs" />
+    <Compile Include="Services\ValidateService.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">

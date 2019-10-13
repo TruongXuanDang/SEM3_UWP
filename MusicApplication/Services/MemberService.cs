@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.UI.Popups;
 using MusicApplication.Constant;
 using MusicApplication.Entities;
 using Newtonsoft.Json;
@@ -27,6 +28,8 @@ namespace MusicApplication.Services
             HttpContent content = new StringContent(JsonConvert.SerializeObject(user),Encoding.UTF8,"application/json");
             var httpRequestMessage = httpClient.PostAsync(ApiUrl.API_REGISTER, content);
             var jsonResult = httpRequestMessage.Result.Content.ReadAsStringAsync().Result;
+            MessageDialog dialog = new MessageDialog(jsonResult);
+            dialog.ShowAsync().GetAwaiter().GetResult();
             return jsonResult;
         }
 

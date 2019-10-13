@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using Windows.Foundation;
 using Windows.UI.Xaml;
@@ -9,6 +10,7 @@ using Windows.Storage;
 using System.Net;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Diagnostics;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Navigation;
 using MusicApplication.Services;
 
@@ -23,11 +25,14 @@ namespace MusicApplication.Pages
     {
         private MemberService memberService;
         private FileService fileService;
+        private ValidateService validateService;
+        private int gender=0;
         public Register()
         {
             this.InitializeComponent();
             this.memberService = new MemberService();
             this.fileService = new FileService();
+            this.validateService = new ValidateService();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
 
@@ -101,7 +106,7 @@ namespace MusicApplication.Pages
             }
         }
 
-        private void ButtonBase_RegisterClick(object sender, RoutedEventArgs e)
+        private async void ButtonBase_RegisterClick(object sender, RoutedEventArgs e)
         {
             var user = new User
             {
@@ -112,12 +117,49 @@ namespace MusicApplication.Pages
                 phone = Phone.Text,
                 address = Address.Text,
                 introduction = Introduction.Text,
-                gender = Int32.Parse(Gender.Text),
-                birthday = Birthday.DayFormat,
+                gender = gender,
+                birthday = Birthday.Date.ToString("yyyy-MM-dd"),
                 email = Email.Text,
                 password = Password.Password
             };
-            memberService.Register(user);
+            Dictionary<String, String> errors = user.Validate();
+            if (errors.Count == 0)
+            {
+                memberService.Register(user);
+                validateService.ValidateTrue();
+            }
+            else
+            {
+                validateService.ValidateFalse(FirstNameMessage, errors,"firstName");
+                validateService.ValidateFalse(LastNameMessage, errors,"lastName");
+                validateService.ValidateFalse(EmailMessage, errors,"email");
+                validateService.ValidateFalse(PasswordMessage, errors,"password");
+                validateService.ValidateFalse(BirthdayMessage, errors,"birthday");
+
+            }
+        }
+
+        private void BGRadioButton_Checked(object sender, RoutedEventArgs e)
+        {
+            RadioButton rb = sender as RadioButton;
+
+            if (rb != null)
+            {
+                string colorName = rb.Tag.ToString();
+                switch (colorName)
+                {
+                    case "Male":
+                        gender = 0;
+                        break;
+                    case "Female":
+                        gender = 1;
+                        break;
+                    case "Other":
+                        gender = 2;
+                        break;
+                    
+                }
+            }
         }
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
-using MusicApplication.Constant;
 using MusicApplication.Entities;
 using MusicApplication.Services;
 using Newtonsoft.Json;

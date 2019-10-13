@@ -18,11 +18,13 @@ namespace MusicApplication.Pages
     {
         private SongService songService;
         private FileService fileService;
+        private ValidateService validateService;
         public SongCreate()
         {
             this.InitializeComponent();
             this.songService = new SongService();
             this.fileService = new FileService();
+            this.validateService = new ValidateService();
             this.NavigationCacheMode = NavigationCacheMode.Enabled;
         }
         private async void ButtonBase_OnClick(object sender, RoutedEventArgs e)
@@ -41,26 +43,14 @@ namespace MusicApplication.Pages
             if (errors.Count == 0)
             {
                 songService.CreateSong(song, fileService.ReadFromTxtFile());
-                MessageDialog dialog = new MessageDialog("Succeeded");
-                await dialog.ShowAsync();
+                validateService.ValidateTrue();
 
             }
             else
             {
-                if (errors.ContainsKey("name"))
-                {
-                    NameMessage.Text = errors["name"];
-                    NameMessage.Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    //NameMessage.Text = errors["name"];
-                    NameMessage.Visibility = Visibility.Collapsed;
-                }
-                // pop up error message
+                validateService.ValidateFalse(NameMessage,errors,"name");
+                validateService.ValidateFalse(SingerMessage,errors, "single");
             }
-            //var song = new Song();
-            
         }
     }
 }
