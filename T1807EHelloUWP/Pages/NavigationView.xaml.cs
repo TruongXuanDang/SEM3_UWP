@@ -176,7 +176,7 @@ namespace T1807EHelloUWP.Pages
             {
                 // SettingsItem is not part of NavView.MenuItems, and doesn't have a Tag.
                 NavView.SelectedItem = (NavigationViewItem)NavView.SettingsItem;
-                NavView.Header = "Settings";
+                NavView.Header = "Log out";
             }
             else if (ContentFrame.SourcePageType != null)
             {

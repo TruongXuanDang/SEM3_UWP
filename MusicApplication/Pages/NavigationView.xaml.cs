@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Abp.Application.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Windows.System;
@@ -135,6 +136,12 @@ namespace MusicApplication.Pages
 
         private void On_Navigated(object sender, NavigationEventArgs e)
         {
+            if (Frame != null)
+            {
+                var cacheSize = Frame.CacheSize;
+                Frame.CacheSize = 0;
+                Frame.CacheSize = cacheSize;
+            }
             NavView.IsBackEnabled = ContentFrame.CanGoBack;
 
             if (ContentFrame.SourcePageType == typeof(SongList))
@@ -158,6 +165,7 @@ namespace MusicApplication.Pages
 
         private void ButtonBase_OnClick(object sender, RoutedEventArgs e)
         {
+            this.NavigationCacheMode = NavigationCacheMode.Disabled;
             this.Frame.Navigate(typeof(Login));
         }
     }
