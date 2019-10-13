@@ -51,6 +51,9 @@ namespace MusicApplication.Pages
             {
                 validateService.ValidateFalse(NameMessage,errors,"name");
                 validateService.ValidateFalse(SingerMessage,errors, "single");
+                validateService.ValidateFalse(ThumbnailMessage,errors,"thumbnail");
+                validateService.ValidateFalse(LinkMessage,errors,"link");
+                validateService.ValidateFalse(AuthorMessage,errors,"author");
             }
         }
     }

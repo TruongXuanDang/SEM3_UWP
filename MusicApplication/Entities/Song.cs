@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using MusicApplication.Constant;
 
 namespace MusicApplication.Entities
 {
@@ -28,6 +30,22 @@ namespace MusicApplication.Entities
             if (string.IsNullOrEmpty(singer))
             {
                 errors.Add("single", "Single is required!");
+            }
+            if (string.IsNullOrEmpty(thumbnail))
+            {
+                errors.Add("thumbnail", "Thumbnail is required!");
+            }
+            if (string.IsNullOrEmpty(link))
+            {
+                errors.Add("link", "Link is required!");
+            }
+            else if (!Regex.IsMatch(link, ApiRegex.LINK_MP3_REGEX))
+            {
+                errors.Add("link", "Link need to be ended with '.mp3'");
+            }
+            if (string.IsNullOrEmpty(author))
+            {
+                errors.Add("author", "Author is required!");
             }
             return errors;
         }

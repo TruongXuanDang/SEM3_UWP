@@ -128,10 +128,18 @@ namespace MusicApplication.Pages
             Dictionary<String, String> errors = user.Validate();
             if (errors.Count == 0)
             {
-                memberService.Register(user);
-                validateService.ValidateTrue();
-                this.NavigationCacheMode = NavigationCacheMode.Disabled;
-                this.Frame.Navigate(typeof(Login));
+                try
+                {
+                    memberService.Register(user);
+                    validateService.ValidateTrue();
+                    this.NavigationCacheMode = NavigationCacheMode.Disabled;
+                    this.Frame.Navigate(typeof(Login));
+                }
+                catch (Exception exception)
+                {
+                    MessageDialog dialog = new MessageDialog(exception.Message);
+                    await dialog.ShowAsync();
+                }
             }
             else
             {
@@ -141,6 +149,8 @@ namespace MusicApplication.Pages
                 validateService.ValidateFalse(PasswordMessage, errors,"password");
                 validateService.ValidateFalse(BirthdayMessage, errors,"birthday");
                 validateService.ValidateFalse(AvatarUrlMessage,errors,"avatar");
+                validateService.ValidateFalse(PhoneMessage,errors,"phone");
+                validateService.ValidateFalse(AddressMessage,errors,"address");
 
             }
         }

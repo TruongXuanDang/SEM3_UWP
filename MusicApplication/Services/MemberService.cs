@@ -8,15 +8,16 @@ using Windows.UI.Popups;
 using MusicApplication.Constant;
 using MusicApplication.Entities;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 
 namespace MusicApplication.Services
 {
-    class MemberService:IMemberService
+    class MemberService : IMemberService
     {
         public string Login(LoginMember member)
         {
             HttpClient httpClient = new HttpClient();
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(member),Encoding.UTF8,"application/json");
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(member), Encoding.UTF8, "application/json");
             var httpRequestMessage = httpClient.PostAsync(ApiUrl.API_LOGIN, content);
             var jsonResult = httpRequestMessage.Result.Content.ReadAsStringAsync().Result;
             return jsonResult;
@@ -25,9 +26,13 @@ namespace MusicApplication.Services
         public string Register(User user)
         {
             HttpClient httpClient = new HttpClient();
-            HttpContent content = new StringContent(JsonConvert.SerializeObject(user),Encoding.UTF8,"application/json");
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(user), Encoding.UTF8, "application/json");
             var httpRequestMessage = httpClient.PostAsync(ApiUrl.API_REGISTER, content);
             var jsonResult = httpRequestMessage.Result.Content.ReadAsStringAsync().Result;
+            if (jsonResult.Contains("error"))
+            {
+                throw new Exception("email existed!");
+            }
             return jsonResult;
         }
 

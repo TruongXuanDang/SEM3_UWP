@@ -33,7 +33,9 @@
             </StackPanel>
             <StackPanel x:Name="Associate" RelativePanel.RightOf="GeneralInfo" Margin="20" HorizontalAlignment="Left" VerticalAlignment="Top">
                 <TextBox x:Name="Phone" Header= "Phone" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                <TextBlock x:Name="PhoneMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
                 <TextBox x:Name="Address" Header= "Address" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
+                <TextBlock x:Name="AddressMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
                 <TextBox x:Name="Email" Header= "Email" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></TextBox>
                 <TextBlock x:Name="EmailMessage" Visibility="Collapsed" Foreground="Red"></TextBlock>
                 <PasswordBox x:Name="Password" Header= "Password" Margin="0,24,0,0" MaxLength="320" Width="400" HorizontalAlignment="Left"></PasswordBox>

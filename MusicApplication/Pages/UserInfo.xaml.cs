@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 using MusicApplication.Entities;
@@ -21,11 +22,17 @@ namespace MusicApplication.Pages
             this.InitializeComponent();
             this.fileService = new FileService();
             this.memberService = new MemberService();
-
             var jsonResult = memberService.GetInformation(fileService.ReadFromTxtFile());
             var resUser = JsonConvert.DeserializeObject<User>(jsonResult);
 
-            avatar.ImageSource = new BitmapImage(new Uri(resUser.avatar));
+            try
+            {
+                avatar.ImageSource = new BitmapImage(new Uri(resUser.avatar));
+            }
+            catch (Exception e)
+            {
+                avatar.ImageSource = new BitmapImage(new Uri("ms-appx:///Sources/boy.png"));
+            }
             name.Text = resUser.firstName+" "+ resUser.lastName;
             switch (resUser.gender)
             {
