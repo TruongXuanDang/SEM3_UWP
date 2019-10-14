@@ -8,7 +8,11 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <Grid>
-        <TextBlock>Page1</TextBlock>
+    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <StackPanel x:Name="MainInfo" Background="White">
+            <TextBox x:Name="Note" Header= "Note" Margin="0,24,0,0" MaxLength="320" Width="400"></TextBox>
+            
+            <Button Click="Button_Click"  Content="Save" Width="80" HorizontalAlignment="Center" Margin="0,20" Background="DodgerBlue" Foreground="White"/>
+        </StackPanel>
     </Grid>
 </Page>
