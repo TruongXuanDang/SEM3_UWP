@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -7,6 +9,7 @@ using UWPLastTest.Services;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Storage;
+using Windows.Storage.Search;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -24,25 +27,21 @@ namespace UWPLastTest.Pages
     /// </summary>
     public sealed partial class Page1 : Page
     {
-        
+        public List<string> ListNotes = new List<string>();
         public Page1()
         {
             this.InitializeComponent();
+
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             string note = Note.Text;
             var dateTime = DateTime.Now;
+            string fileName = dateTime.ToString("yyyy-MM-dd-HH-mm") + ".txt";
 
-            var year = dateTime.Year;
-            var month = dateTime.Month;
-            var day = dateTime.Day;
-            var hour = dateTime.TimeOfDay.Hours;
-            var minutes = dateTime.TimeOfDay.Minutes;
-
-            string fileName = year + "-" + month + "-" + day + "-" + hour + "-" + minutes + ".txt";
-            WriteIntoTxtFile(note,fileName);
+            WriteIntoTxtFile(note, fileName);
         }
 
         public StorageFile WriteIntoTxtFile(string note, string fileName)
@@ -56,6 +55,20 @@ namespace UWPLastTest.Pages
 
             Windows.Storage.FileIO.WriteTextAsync(sampleFile, note).GetAwaiter().GetResult();
             return sampleFile;
+        }
+
+        public async void GetFile()
+        {
+            Windows.Storage.StorageFolder storageFolder =
+                Windows.Storage.ApplicationData.Current.LocalFolder;
+
+            // Get the first 20 files in the current folder, sorted by date.
+            IReadOnlyList<StorageFile> sortedItems = await storageFolder.GetFilesAsync(CommonFileQuery.OrderByDate, 0, 20);
+
+            // Iterate over the results and print the list of files
+            // to the Visual Studio Output window.
+            foreach (StorageFile file in sortedItems)
+                Debug.WriteLine(file.Name + ", " + file.DateCreated);
         }
     }
 }

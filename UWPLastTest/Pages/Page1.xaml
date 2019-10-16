@@ -11,8 +11,19 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <StackPanel x:Name="MainInfo" Background="White">
             <TextBox x:Name="Note" Header= "Note" Margin="0,24,0,0" MaxLength="320" Width="400"></TextBox>
-            
+
             <Button Click="Button_Click"  Content="Save" Width="80" HorizontalAlignment="Center" Margin="0,20" Background="DodgerBlue" Foreground="White"/>
         </StackPanel>
+
+        <ListView ItemsSource="{x:Bind ListNotes}" x:Name="ListNotes">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Margin="10, 10, 0, 0">
+                        <TextBlock Text="{x:Bind name}" Style="{ThemeResource BaseTextBlockStyle}"></TextBlock>
+                        <TextBlock Text="{x:Bind singer}" Style="{ThemeResource CaptionTextBlockStyle}"></TextBlock>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
